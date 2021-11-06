@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Barcode Generator (Code-128)</title>
+
+		<link href="//mincss.com/entireframework.min.css" rel="stylesheet" type="text/css">
+		<style>img.barcode { margin-bottom: 25px; }</style>
+	</head>
+	<body>
+		<nav class="nav" tabindex="-1" onclick="this.focus()">
+			<div class="container">
+				<a class="pagename current" href="#">Barcode Generator (Code-128)</a>
+			</div>
+		</nav>
+		<button class="btn-close btn btn-sm">×</button>
+		<div class="container">
+			<h1>Barcode Generator</h1>
+			<p>Paste the references you want to use to generate barcodes. Empty lines will be ignored.</p>
+			<textarea id="references" style="width: 100%;  height: 200px;"></textarea><br/>
+			<a href="#" onclick="render(); return false;" class="btn btn-sm btn-a">Render barcodes</a>
+			<br/><br/><br/><br/><br/>
+
+			<div id="render_area"></div>
+		</div>
+
+		<script>
+			const url = 'https://barcode.tec-it.com/barcode.ashx?code=Code128&translate-esc=on&data=';
+			
+			const area = document.querySelector('#render_area');
+			const references = document.querySelector('#references');
+			
+			function render() {
+				area.innerHTML = '';
+				var refs = references.value.split('\n');
+			
+				for (i=0; i<refs.length; i++) {
+					if (refs[i].length === 0) continue;
+			
+					area.innerHTML += '<img src="' + url + refs[i] + '" class="barcode" /><br/><br/>\n';
+				}
+			}
+		</script>
+	</body>
+</html>
